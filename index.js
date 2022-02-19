@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 app.use('/users', userController);
 
+app.use(errorMiddlewares.joiError);
 app.use(errorMiddlewares.internalError);
 
 app.listen(port, () => console.log('ouvindo porta 3000!'));

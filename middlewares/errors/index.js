@@ -1,3 +1,4 @@
 const internalError = require('./internalError');
+const joiError = require('./joiError');
 
-module.exports = { internalError };
+module.exports = { internalError, joiError };
