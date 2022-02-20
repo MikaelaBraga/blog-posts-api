@@ -8,7 +8,7 @@ router.post('/', rescue(async (req, res) => {
 
   const tokenUser = await userService.createUser(req.body);
   
-  return res.status(201).json({ message: tokenUser });
+  return res.status(201).json({ token: tokenUser });
 }));
 
 module.exports = router;
