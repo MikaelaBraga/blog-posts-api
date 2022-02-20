@@ -1,14 +1,14 @@
 const router = require('express').Router();
 const rescue = require('express-rescue');
-const { User } = require('../models');
-// const Joi = require('joi');
+const userService = require('../services/userService');
+const { validateWithJoi } = require('../utils/validateWithJoi');
 
 router.post('/', rescue(async (req, res) => {
-  const { displayName, email, password, image } = req.body;
+  validateWithJoi(req.body);
 
-  await User.create({ displayName, email, password, image });
+  const tokenUser = await userService.createUser(req.body);
   
-  return res.status(201).json({ message: 'Token aqui' });
+  return res.status(201).json({ message: tokenUser });
 }));
 
 module.exports = router;
