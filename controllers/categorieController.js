@@ -12,4 +12,10 @@ routerCategorie.post('/', auth, rescue(async (req, res) => {
   return res.status(201).json(categorie);
 }));
 
+routerCategorie.get('/', auth, rescue(async (req, res) => {
+  const categories = await categorieService.getAllCategories();
+
+  return res.status(200).json(categories);
+}));
+
 module.exports = routerCategorie;
