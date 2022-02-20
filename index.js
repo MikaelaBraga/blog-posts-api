@@ -5,12 +5,14 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const userController = require('./controllers/userController');
+const loginController = require('./controllers/loginController');
 const errorMiddlewares = require('./middlewares/errors');
 // const middlewareAuth = require('./middlewares/auth');
 
 app.use(bodyParser.json());
 
 app.use('/user', userController);
+app.use('/login', loginController);
 
 // app.use(middlewareAuth);
 

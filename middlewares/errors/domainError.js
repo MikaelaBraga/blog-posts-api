@@ -1,5 +1,6 @@
 const errorMap = {
   conflicts: 409,
+  invalidFields: 400,
 };
 
 module.exports = (err, req, res, next) => {
