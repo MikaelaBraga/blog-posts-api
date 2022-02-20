@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const rescue = require('express-rescue');
 const userService = require('../services/userService');
-const { validateWithJoi } = require('../utils/validateWithJoi');
+const { validateWithJoi } = require('../utils/validateJoiUser');
 const auth = require('../middlewares/auth');
 
 router.post('/', rescue(async (req, res) => {

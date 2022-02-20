@@ -6,12 +6,14 @@ const port = process.env.PORT || 3000;
 
 const userController = require('./controllers/userController');
 const loginController = require('./controllers/loginController');
+const categorieController = require('./controllers/categorieController');
 const errorMiddlewares = require('./middlewares/errors');
 
 app.use(bodyParser.json());
 
 app.use('/user', userController);
 app.use('/login', loginController);
+app.use('/categories', categorieController);
 
 app.use(errorMiddlewares.joiError);
 app.use(errorMiddlewares.domainError);
