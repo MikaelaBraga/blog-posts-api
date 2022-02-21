@@ -46,4 +46,8 @@ const getBlogPostById = async (id) => {
   return blogPost;
 };
 
+// const updateBlogPost = async (id) => {};
+
+// const deleteBlogPost = async (id) => {};
+
 module.exports = { createBlogPost, getAllBlogPost, getBlogPostById };
