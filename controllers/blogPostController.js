@@ -21,4 +21,11 @@ routerBlogPost.get('/', auth, rescue(async (req, res) => {
   return res.status(200).json(blogPost);
 }));
 
+routerBlogPost.get('/:id', auth, rescue(async (req, res) => {
+  const { id } = req.params;
+  const blogPost = await blogPostService.getBlogPostById(id);
+
+  return res.status(200).json(blogPost);
+}));
+
 module.exports = routerBlogPost;
