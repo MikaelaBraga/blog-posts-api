@@ -1,15 +1,21 @@
 const { Categorie } = require('../models');
 
 const createCategorie = async (name) => {
-  const categorie = await Categorie.create({ name });
+  const category = await Categorie.create({ name });
 
-  return categorie;
+  return category;
 };
 
 const getAllCategories = async () => {
   const categories = await Categorie.findAll();
 
-  return categories;
+  return categories.map((cat) => cat.dataValues);
 };
 
-module.exports = { createCategorie, getAllCategories };
+const getCategoryById = async (id) => {
+  const category = await Categorie.findByPk(id);
+
+  return category;
+};
+
+module.exports = { createCategorie, getAllCategories, getCategoryById };

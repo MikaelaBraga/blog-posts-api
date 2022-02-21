@@ -17,7 +17,7 @@ const createUser = async ({ displayName, email, password, image }) => {
 const getUserByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
 
-  return user;
+  return user.dataValues;
 };
 
 const getAllUsers = async () => {
@@ -28,7 +28,6 @@ const getAllUsers = async () => {
 
 const getUserById = async (id) => {
   const user = await User.findByPk(id);
-  console.log(user);
 
   if (!user) throw errorConstructor('notFound', 'User does not exist');
 

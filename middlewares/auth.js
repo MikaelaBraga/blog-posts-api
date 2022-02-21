@@ -14,6 +14,7 @@ module.exports = async (req, res, next) => {
     const { email } = jwt.verify(token, JWT_SECRET, jwtConfig);
 
     const user = await userService.getUserByEmail(email);
+    // console.log(user);
 
     req.user = user;
 
