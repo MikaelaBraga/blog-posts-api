@@ -15,4 +15,10 @@ routerBlogPost.post('/', auth, rescue(async (req, res) => {
   return res.status(201).json(blogPost);
 }));
 
+routerBlogPost.get('/', auth, rescue(async (req, res) => {
+  const blogPost = await blogPostService.getAllBlogPost();
+
+  return res.status(200).json(blogPost);
+}));
+
 module.exports = routerBlogPost;
