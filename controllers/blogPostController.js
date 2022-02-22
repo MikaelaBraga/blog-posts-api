@@ -3,6 +3,7 @@ const rescue = require('express-rescue');
 const blogPostService = require('../services/blogPostService');
 const { validateJoiBlogPost } = require('../utils/validateJoiBlogPost');
 const auth = require('../middlewares/auth');
+const { validateBlogPostUpdated } = require('../utils/validateJoiBlogPostUpdate');
 
 routerBlogPost.post('/', auth, rescue(async (req, res) => {
   validateJoiBlogPost(req.body);
@@ -31,6 +32,7 @@ routerBlogPost.get('/:id', auth, rescue(async (req, res) => {
 routerBlogPost.put('/:id', auth, rescue(async (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
+  validateBlogPostUpdated({ title, content });
 
   const userLogged = req.user;
 
