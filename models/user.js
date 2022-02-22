@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // um usuário pode ter muitos posts
   User.associate = (models) => {
-    User.hasMany(models.BlogPost, { foreignKey: 'userId', as: 'posts' });
+    User.hasMany(models.BlogPost, { foreignKey: 'userId', as: 'blogPosts' });
   };
 
   return User;
