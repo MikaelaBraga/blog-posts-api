@@ -25,4 +25,11 @@ router.get('/:id', auth, rescue(async (req, res) => {
   return res.status(200).json(user);
 }));
 
+router.delete('/me', auth, rescue(async (req, res) => {
+  const userLogged = req.user;
+  await userService.deleteUser(userLogged);
+
+  return res.status(204).json();
+}));
+
 module.exports = router;
