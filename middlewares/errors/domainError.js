@@ -2,6 +2,7 @@ const errorMap = {
   conflicts: 409,
   invalidFields: 400,
   notFound: 404,
+  unathourized: 401,
 };
 
 module.exports = (err, req, res, next) => {

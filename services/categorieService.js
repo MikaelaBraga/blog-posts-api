@@ -1,4 +1,5 @@
 const { Categorie } = require('../models');
+// const errorConstructor = require('../utils/errorConstructor');
 
 const createCategorie = async (name) => {
   const category = await Categorie.create({ name });
@@ -15,6 +16,10 @@ const getAllCategories = async () => {
 
 const getCategoryById = async (id) => {
   const category = await Categorie.findByPk(id);
+
+  // if (!category) { 
+  //   throw errorConstructor('invalidFields', '"category" not found');
+  // }
 
   return category;
 };

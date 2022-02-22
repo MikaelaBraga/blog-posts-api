@@ -1,7 +1,6 @@
 const { BlogPost, User, Categorie } = require('../models');
 const errorConstructor = require('../utils/errorConstructor');
 const { getCategoryById } = require('./categorieService');
-// const { getUserById } = require('../services/userService');
 
 // categoryIds: [1, 2]
 
@@ -10,7 +9,7 @@ const createBlogPost = async ({ title, content, userId }, categoryIds) => {
     const category = await getCategoryById(cat);
     // console.log(category);
 
-    if (!category) { 
+    if (!category) {
       throw errorConstructor('invalidFields', '"categoryIds" not found');
     }
   }));
@@ -24,7 +23,7 @@ const getAllBlogPost = async () => {
   const blogPost = await BlogPost.findAll({
     include: [
       { model: User, as: 'user', attributes: { exclude: ['password'] } },
-      { model: Categorie, as: 'categorie', through: { attributes: [] } },
+      { model: Categorie, as: 'categories', through: { attributes: [] } },
     ],
   });
 
@@ -44,8 +43,38 @@ const getBlogPostById = async (id) => {
   return blogPost;
 };
 
-// const updateBlogPost = async (id) => {};
+const updateBlogPost = async ({ title, content, id }, userLogged) => {
+  const blogPost = await BlogPost.findOne({
+    where: { id },
+    include: [{ model: User, as: 'user' }, { model: Categorie, as: 'categories' }],
+  });
 
-// const deleteBlogPost = async (id) => {};
+  // verifica usuário logado
+  if (userLogged.id !== blogPost.userId) {
+    throw errorConstructor('unathourized', 'Unauthorized user');
+  }
 
-module.exports = { createBlogPost, getAllBlogPost, getBlogPostById };
+  await blogPost.update({ title, content, updated: new Date().toString() });
+
+  return blogPost;
+};
+
+const deleteBlogPost = async (id, userLogged) => {
+  const blogPost = await BlogPost.findOne({ where: { id } });
+
+  if (userLogged.id !== blogPost.userId) {
+    throw errorConstructor('unathourized', 'Unauthorized user');
+  }
+
+  if (!blogPost) throw errorConstructor('notFound', 'Post does not exists');
+
+  await BlogPost.destroy({ where: { id } });
+};
+
+module.exports = {
+  createBlogPost,
+  getAllBlogPost,
+  getBlogPostById,
+  updateBlogPost,
+  deleteBlogPost,
+ };
