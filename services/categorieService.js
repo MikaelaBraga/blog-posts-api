@@ -8,8 +8,9 @@ const createCategorie = async (name) => {
 
 const getAllCategories = async () => {
   const categories = await Categorie.findAll();
+  console.log(categories);
 
-  return categories.map((cat) => cat.dataValues);
+  return categories;
 };
 
 const getCategoryById = async (id) => {
